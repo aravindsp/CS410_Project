@@ -11,7 +11,7 @@ Output :
  * Serving Flask app "movieApp" (lazy loading)
  * Environment: production
 
- * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+ * Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
  
  # Execute web server on the cloud (AWS)
  
