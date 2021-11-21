@@ -2,7 +2,7 @@
 
 To Execute Locally :
 
-- Clone the Repo - https://github.com/aravindsp/CS410_Project
+- Clone the Repo
 - Go to directory actor_search_engine
 - Execute buildSearchIndex.py or buildSearchIndex.ipynb to create inverted index - idx folder
 - python movieApp.py
@@ -34,7 +34,7 @@ pip install requests
 pip install flask
 
 ### Clone and Create idx
-git clone https://github.com/aravindsp/CS410_Project
+clone the repo
 cd CS410_Project/actor_search_engine/
 python buildSearchIndex.py
 
@@ -47,7 +47,7 @@ nohup python bgservice.py &
  
 ***Steps***
 
-## Step 1 : Clone the Repo - https://github.com/aravindsp/CS410_Project
+## Step 1 : Clone the Repo
 Go to directory actor_search_engine
 
 ## Step 2 : Download following files and extract the tsv files to "SourceFiles" directory
@@ -74,7 +74,8 @@ Files :
  
  OR 
  
- ### Option 2 - Execute shell script executeAllScripts.sh
+ ### Option 2 - Execute shell script 
+ executeAllScripts.sh
  
  
 ## Step 4 : Build Inverted Index
