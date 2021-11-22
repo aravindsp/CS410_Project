@@ -1,3 +1,7 @@
+# Movie Fans Club Web page
+
+http://54.176.35.246:8080/
+
 # Execute web server Locally (Mac OS)
 
 To Execute Locally :
@@ -19,27 +23,28 @@ Output :
  sudo apt-get update
  
 ### Install Python via Anaconda3
-sudo apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
-wget https://repo.anaconda.com/archive/Anaconda3-5.0.1-Linux-x86_64.sh
-sudo reboot
+- sudo apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+- wget https://repo.anaconda.com/archive/Anaconda3-5.0.1-Linux-x86_64.sh
+- sudo reboot
 
 ### Install Requirements
-sudo apt-get install python3-bs4
-conda install selenium
-sudo apt-get install chromium-chromedriver
+- sudo apt-get install python3-bs4
+- conda install selenium
+- sudo apt-get install chromium-chromedriver
 
-pip install metapy
-pip install pytoml
-pip install requests
-pip install flask
+- pip install --upgrade pandas
+- pip install metapy
+- pip install pytoml
+- pip install requests
+- pip install flask
 
 ### Clone and Create idx
-clone the repo
-cd CS410_Project/actor_search_engine/
-python buildSearchIndex.py
+- clone the repo
+- cd CS410_Project/actor_search_engine/
+- python buildSearchIndex.py
 
 ### Start web server
-nohup python bgservice.py &
+nohup python movieApp.py &
 
  
 # Run all processes from scratch (Mac OS)

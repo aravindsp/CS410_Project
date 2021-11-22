@@ -11,6 +11,7 @@ import sys
 import time
 import metapy
 import pytoml
+import gc
 
 
 import os
@@ -26,36 +27,7 @@ def preprocess_corpus():
     idx = metapy.index.make_inverted_index(cfg)
     return idx
 
-
-def getval(inp):
-
-    print('Running queries',inp)
-    logTxt = datetime.now().strftime("%Y%m%d %H:%M:%S")+" : "+inp
-    with open("logs/queries.txt", "a") as file_object:
-        file_object.write(logTxt)
-
-    query = metapy.index.Document()
-    query.content(inp.strip())
-
-    ranker = metapy.index.OkapiBM25(k1=1.2,b=0.75,k3=500)
-
-    idx = preprocess_corpus()
-    results = ranker.score(idx, query, 100)
-
-    docList_df=pd.read_csv('files/docList_df.csv')
-    docList = docList_df['tconst'].to_list()
-
-    score_out = []
-    for num,(d_id, score) in enumerate(results):
-        t_id = docList[d_id]
-        score_out.append([t_id,score])
-
-    if len(score_out) == 0:
-        score_out = [['t0',0]]
-
-    df = pd.DataFrame(score_out)
-    df.columns=['tconst','doc_scores']
-
+def getActor(df):
     corpusList=pd.read_csv('files/corpusList.csv')
     df = df.merge(corpusList,how='inner')
     df_actor=pd.read_csv('files/actors.csv')
@@ -83,9 +55,50 @@ def getval(inp):
     else:
         df_actor = pd.DataFrame([['No Results Found','','https://www.imdb.com/','']])
 
+    del corpusList
+    gc.collect()
+
+    return df_actor
+
+
+def getval(inp):
+
+    print('Running queries',inp)
+    logTxt = datetime.now().strftime("%Y%m%d %H:%M:%S")+" : "+inp+"\n"
+    with open("logs/queries.txt", "a") as file_object:
+        file_object.write(logTxt)
+
+    query = metapy.index.Document()
+    query.content(inp.strip())
+
+    ranker = metapy.index.OkapiBM25(k1=1.2,b=0.75,k3=500)
+
+    idx = preprocess_corpus()
+    results = ranker.score(idx, query, 100)
+    del idx
+    gc.collect()
+
+    docList_df=pd.read_csv('files/docList_df.csv')
+    docList = docList_df['tconst'].to_list()
+
+    score_out = []
+    for num,(d_id, score) in enumerate(results):
+        t_id = docList[d_id]
+        score_out.append([t_id,score])
+
+    if len(score_out) == 0:
+        score_out = [['t0',0]]
+
+    df = pd.DataFrame(score_out)
+    df.columns=['tconst','doc_scores']
+    df_actor = getActor(df)
+
     df_actor['query']=inp
 
     out=df_actor.values.tolist()
+
+    del df_actor,df,docList_df
+    gc.collect()
     
     return out
     
