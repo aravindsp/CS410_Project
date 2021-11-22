@@ -1,4 +1,4 @@
-# Movie Fans Club Web page
+# Search Engine User Interface
 
 http://54.176.35.246:8080/
 
